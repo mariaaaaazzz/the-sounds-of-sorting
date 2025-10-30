@@ -55,7 +55,7 @@ public class ArrayPanel extends JPanel {
 
             
             if (notes.isHighlighted(i)) {
-                g.setColor(new java.awt.Color(30, 144, 255)); 
+                g.setColor(new java.awt.Color(30, 120, 250)); 
             } else {
                 g.setColor(new java.awt.Color(red, green, blue));
             }
