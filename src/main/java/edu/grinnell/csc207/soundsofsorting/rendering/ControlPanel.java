@@ -1,4 +1,4 @@
-package edu.grinnell.csc207.soundsofsorting;
+package edu.grinnell.csc207.soundsofsorting.rendering;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import edu.grinnell.csc207.soundsofsorting.audio.Scale;
 import edu.grinnell.csc207.soundsofsorting.sortevents.SortEvent;
 import edu.grinnell.csc207.soundsofsorting.sorts.Sorts;
+import edu.grinnell.csc207.soundsofsorting.audio.NoteIndices;
 
 /**
  * The Control Panel houses the GUI for interacting with the Sounds of
@@ -49,7 +51,7 @@ public class ControlPanel extends JPanel {
                 return Sorts.bubbleSort(arr);
             case "Merge":
                 return Sorts.mergeSort(arr);
-            case("Quick"):
+            case "Quick":
                 return Sorts.quickSort(arr);
             default:
                 throw new IllegalArgumentException("generateEvents");
@@ -135,16 +137,21 @@ public class ControlPanel extends JPanel {
                 }
                 isSorting = true;
                 
-                // TODO: fill me in!
+
                 // 1. Create the sorting events list
+                Integer[] original = notes.getNotes().clone();
+                List<SortEvent<Integer>> events = generateEvents((String) sorts.getSelectedItem(), original);
+
                 // 2. Add in the compare events to the end of the list
-                List<SortEvent<Integer>> events = new java.util.LinkedList<>();
+                // List<SortEvent<Integer>> events = new java.util.LinkedList<>();
                 
                 // NOTE: The Timer class repetitively invokes a method at a
                 //       fixed interval.  Here we are specifying that method
                 //       by creating an _anonymous subclass_ of the TimeTask
                 //       class. You can interpret the run() method as the
                 //       method that fires on every "tick" of the program.
+
+
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
                     private int index = 0;
@@ -152,8 +159,13 @@ public class ControlPanel extends JPanel {
                     @Override
                     public void run() {
                         if (index < events.size()) {
-                            SortEvent<Integer> e = events.get(index++);
-                            // TODO: fill me in!
+                            SortEvent<Integer> event = events.get(index++);
+                            event.apply(notes.getNotes());
+                            notes.clearAllHighlighted();
+                            for (Integer pos : event.getAffectedIndices()) {
+                                notes.highlightNote(pos);
+                                scale.playNote(pos, event.isEmphasized());
+                            }
                             // 1. Apply the next sort event.
                             // 3. Play the corresponding notes denoted by the
                             //    affected indices logged in the event.
