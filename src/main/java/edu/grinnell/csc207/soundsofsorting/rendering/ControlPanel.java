@@ -163,7 +163,8 @@ public class ControlPanel extends JPanel {
                             SortEvent<Integer> event = events.get(index++);
                             event.apply(notes.getNotes());
                             notes.clearAllHighlighted();
-                            for (Integer pos : event.getAffectedIndices()) {
+                            for (int i = 0; i < event.getAffectedIndices().size(); i++) {
+                                Integer pos = event.getAffectedIndices().get(i);
                                 notes.highlightNote(pos);
                                 scale.playNote(pos, event.isEmphasized());
                             }
