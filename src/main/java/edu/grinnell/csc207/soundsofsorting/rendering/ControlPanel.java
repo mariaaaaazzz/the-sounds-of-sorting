@@ -140,7 +140,8 @@ public class ControlPanel extends JPanel {
 
                 // 1. Create the sorting events list
                 Integer[] original = notes.getNotes().clone();
-                List<SortEvent<Integer>> events = generateEvents((String) sorts.getSelectedItem(), original);
+                List<SortEvent<Integer>> events = 
+                generateEvents((String) sorts.getSelectedItem(), original);
 
                 // 2. Add in the compare events to the end of the list
                 // List<SortEvent<Integer>> events = new java.util.LinkedList<>();
