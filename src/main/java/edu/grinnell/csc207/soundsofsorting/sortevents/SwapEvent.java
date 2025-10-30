@@ -7,8 +7,8 @@ import java.util.List;
  * A <code>SwapEvent</code> logs a swap between two indices of the array.
  */
 public class SwapEvent<T> implements SortEvent<T>{
-    private final int index1;
-    private final int index2;
+    private int index1;
+    private int index2;
 
     public SwapEvent(int i, int j) {
     this.index1 = i;

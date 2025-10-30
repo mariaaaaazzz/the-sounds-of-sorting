@@ -114,7 +114,7 @@ public class Sorts {
             if (j >= 0) {
                 events.add(new CompareEvent<>(j, i)); 
             }
-            
+
             arr[j + 1] = cur;
             events.add(new CopyEvent<>(j + 1, cur)); 
         }
@@ -254,7 +254,9 @@ public class Sorts {
      */
     private static <T extends Comparable<? super T>>
     void quickSort(T[] arr, int lo, int hi, List<SortEvent<T>> events) {
-        if (lo >= hi) return;
+        if (lo >= hi) {
+            return;
+        }
         int p = partition(arr, lo, hi, events);
         quickSort(arr, lo, p - 1, events);
         quickSort(arr, p + 1, hi, events);

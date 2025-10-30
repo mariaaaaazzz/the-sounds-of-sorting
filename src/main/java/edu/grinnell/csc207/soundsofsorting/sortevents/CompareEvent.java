@@ -8,8 +8,8 @@ import java.util.List;
  * indices in the array.
  */
 public class CompareEvent<T> implements SortEvent<T> {
-    private final int index1;
-    private final int index2;
+    private int index1;
+    private int index2;
 
 
     public CompareEvent(int i, int j) {
