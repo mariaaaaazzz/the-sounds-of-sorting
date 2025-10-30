@@ -74,6 +74,7 @@ public class NoteIndices {
         if (index < 0 || index >= this.highlighted.length) {
             return false;
         }
+        // so that we could check it later
         return this.highlighted[index];
     }
 

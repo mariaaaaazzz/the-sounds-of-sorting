@@ -39,7 +39,9 @@ public class ArrayPanel extends JPanel {
         int width = getWidth();
         int height = getHeight();
         int n = arr.length;
-        if (n == 0) return;
+        if (n == 0) {
+            return;
+        }
 
         int barWidth = width / n;
         int maxValue = n - 1;
